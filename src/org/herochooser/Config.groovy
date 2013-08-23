@@ -1,13 +1,11 @@
 package org.herochooser
 
-import com.jfinal.config.Constants
-import com.jfinal.config.Handlers
-import com.jfinal.config.Interceptors
-import com.jfinal.config.JFinalConfig
-import com.jfinal.config.Plugins
-import com.jfinal.config.Routes
+import com.jfinal.config.*
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin
+import com.jfinal.plugin.druid.DruidPlugin
 import com.jfinal.render.ViewType
-import org.herochooser.controller.BootController
+import org.herochooser.controller.*
+import org.herochooser.model.*
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,10 +24,19 @@ class Config extends JFinalConfig{
     @Override
     void configRoute(Routes me) {
         me.add("/", BootController.class)
+        me.add("/hero", HeroController.class)
+        me.add("/skill", SkillController.class)
     }
 
     @Override
     void configPlugin(Plugins me) {
+        DruidPlugin dp = new DruidPlugin("jdbc:mysql:///herochooser","root" ,"root")
+        me.add(dp)
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(dp)
+        me.add(arp)
+
+        arp.addMapping("hero", Hero.class)
+        arp.addMapping("skill", Skill.class)
 
     }
 

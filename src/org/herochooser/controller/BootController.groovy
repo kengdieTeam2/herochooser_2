@@ -1,6 +1,9 @@
 package org.herochooser.controller
 
 import com.jfinal.core.Controller
+import org.herochooser.room.RoomArray
+import org.herochooser.room.RoomBuilder
+import org.herochooser.room.RoomObject
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +14,8 @@ import com.jfinal.core.Controller
  */
 class BootController extends Controller{
     def index(){
+        if(getSessionAttr("role"))
+            setSessionAttr("role", RoomBuilder.entry())
         render("/index.jsp")
     }
 }

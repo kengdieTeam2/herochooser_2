@@ -10,4 +10,9 @@ import com.jfinal.plugin.activerecord.Model
  * To change this template use File | Settings | File Templates.
  */
 class Skill extends Model<Skill>{
+    public static Skill dao = new Skill()
+
+    def byHero(Hero hero){
+        dao.find("SELECT * FROM skill WHERE hero=?", hero.getInt("id"))
+    }
 }

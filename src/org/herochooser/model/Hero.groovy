@@ -10,4 +10,5 @@ import com.jfinal.plugin.activerecord.Model
  * To change this template use File | Settings | File Templates.
  */
 class Hero extends Model<Hero>{
+    public static Hero dao = new Hero()
 }
