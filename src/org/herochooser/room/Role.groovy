@@ -13,4 +13,6 @@ class Role {
     Long id
     Hero hero
     int roomIndex
+    int turnIndex
+    int type
 }

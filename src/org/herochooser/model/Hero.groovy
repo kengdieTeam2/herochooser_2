@@ -11,4 +11,8 @@ import com.jfinal.plugin.activerecord.Model
  */
 class Hero extends Model<Hero>{
     public static Hero dao = new Hero()
+
+    def query(String name){
+        dao.find("SELECT * FROM hero WHERE name LIKE ?", "%${name}%")
+    }
 }

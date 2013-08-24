@@ -31,5 +31,8 @@ class RoomController extends Controller{
     def join(){
         RoomObject room = query(getParaToInt("id"))
         room << getSessionAttr("role")
+        setSessionAttr("room", room)
+        room.notifyAll()
+        renderJson([success: true])
     }
 }

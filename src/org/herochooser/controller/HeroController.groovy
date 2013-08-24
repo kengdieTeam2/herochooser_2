@@ -2,6 +2,8 @@ package org.herochooser.controller
 
 import com.jfinal.core.Controller
 import org.herochooser.model.Hero
+import org.herochooser.room.Role
+import org.herochooser.room.RoomObject
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +18,35 @@ class HeroController extends Controller {
         renderJson(Hero.dao.findById(getPara("id")))
     }
 
+    def confirm(){
+        Role role = getSessionAttr("role")
+        Hero hero = Hero.dao.findById(getParaToInt("id"))
+        role.hero = hero
+        renderJson(hero)
+        RoomObject room = getSessionAttr("room")
+        room.notifyAll()
+    }
+
     def create(){
+
+    }
+
+    def query(){
+
+    }
+
+    def random(){
+        Role role = getSessionAttr("role")
+        RoomObject room = getSessionAttr("room")
+        if(role.roomIndex != room.index){
+            room.wait()
+        }
+
+        renderJson([])
+
+    }
+
+    def randomKing(){
 
     }
 }
